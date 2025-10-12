@@ -202,6 +202,56 @@ Multi-region deployment, circuit breakers, fallback models, persistent caching.
 
 ---
 
+### 🧩 16. LLM Text Generation Parameters
+
+**Q:** What are the key text generation parameters in large language models (LLMs), and how do they affect output?
+
+**A:**
+These parameters control the *style*, *diversity*, and *determinism* of model responses.
+
+* **`temperature`** – Controls randomness.
+
+  * Low (≈0.1–0.3): Deterministic, factual answers.
+  * High (≈0.8–1.0): Creative, varied outputs.
+    💡 *Think of it as the model’s “spice level.”*
+
+* **`top_k`** – Keeps only the top *k* most probable next tokens.
+
+  * Small *k* (e.g., 20): Safer, focused text.
+  * Large *k* (e.g., 100): More variety.
+    💡 *Prunes the long tail of unlikely words.*
+
+* **`top_p` (nucleus sampling)** – Chooses from smallest token set whose probabilities sum to *p*.
+
+  * Common range: 0.8–0.95.
+    💡 *Balances diversity and coherence more smoothly than top_k.*
+
+* **`max_tokens`** – Caps output length.
+
+  * Prevents runaway responses and controls cost.
+    💡 *Useful for APIs with per-token pricing.*
+
+* **`repetition_penalty` / `presence_penalty` / `frequency_penalty`** – Reduce repeated phrases or overused words.
+  💡 *Encourages linguistic variety and discourages loops.*
+
+* **`stop` tokens** – Define where generation should end.
+  💡 *Useful for structured formats like JSON or conversations.*
+
+* **`beam_search`** (less common in chat models) – Explores multiple likely continuations before choosing the best.
+  💡 *Used for tasks needing precision over creativity.*
+
+---
+
+💡 *In short:*
+`temperature` = creativity,
+`top_p/top_k` = diversity filter,
+`penalties` = repetition control,
+`max_tokens` = budget guardrail.
+
+🧠 *Mastering these dials turns you from a prompt engineer into a dialogue composer.*
+
+---
+
 ## 📊 Part II: Classical Data Science Concepts
 
 ### 🧠 1. Activation Functions
@@ -242,7 +292,3 @@ The best AI engineers are *bilingual*: fluent in **statistical reasoning** and *
 If you can move from **sigmoid to self-attention** with conceptual clarity, you’re already ahead of 90% of the field.
 
 Keep these flashcards handy — your neurons deserve a good warm-up before the next interview.
-
----
-
-Would you like me to convert this into a **printable / Notion-style flashcard deck** or **interactive PDF** version next (with color-coded GenAI vs Data Science sections)?
