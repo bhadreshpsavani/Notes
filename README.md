@@ -1,5 +1,8 @@
 # Notes
 
+### 16th October, 2025
+* [guardrails langchain](https://search.app/DaPFF)
+
 ### 15th October, 2025
 * [mermaid for architecture creation](https://www.mermaidchart.com/)
 * [archi for architecture creation](https://www.archimatetool.com/)
