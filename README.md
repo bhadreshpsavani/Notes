@@ -1,5 +1,8 @@
 # Notes
 
+### 7th November, 2025
+* [flaticons](https://www.flaticon.com/)
+
 ### 16th October, 2025
 * [guardrails langchain](https://search.app/DaPFF)
 
