@@ -1,5 +1,8 @@
 # Notes
 
+### 3rd December, 2025
+* [text to visual napkin.ai](https://www.napkin.ai/)
+
 ### 7th November, 2025
 * [flaticons](https://www.flaticon.com/)
 
