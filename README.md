@@ -2,6 +2,7 @@
 
 ### 3rd December, 2025
 * [text to visual napkin.ai](https://www.napkin.ai/)
+* [microsoft-whiteboard](https://apps.microsoft.com/detail/9mspc6mp8fm4?hl=en-US&gl=US)
 
 ### 7th November, 2025
 * [flaticons](https://www.flaticon.com/)
