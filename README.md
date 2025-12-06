@@ -1,5 +1,8 @@
 # Notes
 
+### 6th December l, 2025
+* [Google codewiki](https://share.google/35AhzKI0K0mfmYrC1)
+
 ### 3rd December, 2025
 * [text to visual napkin.ai](https://www.napkin.ai/)
 * [microsoft-whiteboard](https://apps.microsoft.com/detail/9mspc6mp8fm4?hl=en-US&gl=US)
