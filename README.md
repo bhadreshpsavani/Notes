@@ -1,6 +1,9 @@
 # Notes
 
-### 6th December l, 2025
+### 9th December, 2025
+* [Azure-LLMOps-Workshop](https://microsoft.github.io/llmops-workshop/)
+
+### 6th December, 2025
 * [Google codewiki](https://share.google/35AhzKI0K0mfmYrC1)
 
 ### 3rd December, 2025
