@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLOps Lifecycle Flashcards</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+        }
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+        .card-container {
+            transition: transform 0.6s;
+        }
+        .flipped {
+            transform: rotateY(180deg);
+        }
+        /* Custom Scrollbar for card content if it gets too long */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+</head>
+<body class="h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-slate-800 to-slate-900 text-white">
+
+    <!-- Header -->
+    <div class="absolute top-6 text-center w-full px-4">
+        <h1 class="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 mb-2">
+            MLOps Flashcards
+        </h1>
+        <p class="text-slate-400 text-sm md:text-base">Mastering the Machine Learning Lifecycle</p>
+    </div>
+
+    <!-- Main Flashcard Area -->
+    <div class="relative w-full max-w-md h-[450px] md:h-[500px] px-6">
+        
+        <!-- Navigation Buttons (Left) -->
+        <button id="prevBtn" class="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-2 md:-translate-x-12 bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-full shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed z-10 focus:outline-none focus:ring-2 focus:ring-cyan-400">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <!-- Card Scene -->
+        <div class="w-full h-full perspective-1000 group cursor-pointer" onclick="flipCard()">
+            <div id="cardInner" class="card-container relative w-full h-full transform-style-3d shadow-2xl rounded-2xl">
+                
+                <!-- Front Side -->
+                <div class="absolute w-full h-full backface-hidden bg-white text-slate-800 rounded-2xl p-8 flex flex-col items-center justify-center border-b-4 border-cyan-500 select-none">
+                    <div class="mb-6 p-4 bg-cyan-50 rounded-full">
+                        <i id="cardIcon" class="fas fa-code-branch text-5xl text-cyan-600"></i>
+                    </div>
+                    <h2 id="cardTitle" class="text-2xl md:text-3xl font-bold text-center mb-4 text-slate-800">CI/CD of Code</h2>
+                    <p class="text-slate-500 text-sm font-semibold uppercase tracking-wider">Tap to Reveal</p>
+                </div>
+
+                <!-- Back Side -->
+                <div class="absolute w-full h-full backface-hidden rotate-y-180 bg-slate-800 text-white rounded-2xl p-8 flex flex-col border-b-4 border-blue-500 overflow-hidden">
+                    <div class="flex items-center justify-between mb-4 border-b border-slate-700 pb-2">
+                        <h3 id="cardBackTitle" class="text-xl font-bold text-cyan-400">CI/CD of Code</h3>
+                        <i class="fas fa-undo text-slate-500 text-sm"></i>
+                    </div>
+                    <div id="cardContent" class="text-slate-300 text-base leading-relaxed overflow-y-auto custom-scrollbar flex-grow">
+                        <!-- Content injected via JS -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Navigation Buttons (Right) -->
+        <button id="nextBtn" class="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-2 md:translate-x-12 bg-slate-700 hover:bg-slate-600 text-white p-3 rounded-full shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed z-10 focus:outline-none focus:ring-2 focus:ring-cyan-400">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+    </div>
+
+    <!-- Progress Dots -->
+    <div class="absolute bottom-10 flex space-x-2" id="paginationDots">
+        <!-- Dots injected via JS -->
+    </div>
+
+    <!-- Key Handling Info -->
+    <div class="absolute bottom-4 text-slate-500 text-xs">
+        Use Arrow Keys to Navigate • Space/Enter to Flip
+    </div>
+
+    <script>
+        const cards = [
+            {
+                title: "CI/CD of Code",
+                icon: "fa-code-branch",
+                content: `
+                    <p class="mb-3"><strong class="text-white">Definition:</strong> Automated building, testing, and deployment of ML pipelines and application code.</p>
+                    <ul class="list-disc list-outside ml-4 space-y-2">
+                        <li><strong>CI (Integration):</strong> Validates code changes (unit tests, linting) and pipeline integrity.</li>
+                        <li><strong>CD (Deployment):</strong> Automatically deploys the training pipeline or serving service to target environments (staging/prod).</li>
+                        <li><strong>Key Goal:</strong> Ensures reproducible and reliable release cycles for ML software.</li>
+                    </ul>
+                `
+            },
+            {
+                title: "Data Pipeline",
+                icon: "fa-database",
+                content: `
+                    <p class="mb-3"><strong class="text-white">Definition:</strong> The systematic flow of data from ingestion to processing and feature engineering.</p>
+                    <ul class="list-disc list-outside ml-4 space-y-2">
+                        <li><strong>Ingestion:</strong> Collecting data from various sources (batch or stream).</li>
+                        <li><strong>Validation:</strong> checking schema and statistics (TFDV, Great Expectations).</li>
+                        <li><strong>Transformation:</strong> Cleaning and feature engineering ensuring consistency between training and serving.</li>
+                    </ul>
+                `
+            },
+            {
+                title: "Continuous Training (CT)",
+                icon: "fa-dumbbell",
+                content: `
+                    <p class="mb-3"><strong class="text-white">Definition:</strong> Automatic retraining of models when new data arrives or performance degrades.</p>
+                    <ul class="list-disc list-outside ml-4 space-y-2">
+                        <li><strong>Triggers:</strong> Scheduled intervals, data drift detection, or manual invocation.</li>
+                        <li><strong>Process:</strong> Retraining on fresh data, hyperparameter tuning, and producing a candidate model.</li>
+                        <li><strong>Outcome:</strong> Prevents model staleness in dynamic environments.</li>
+                    </ul>
+                `
+            },
+            {
+                title: "Continuous Evaluation",
+                icon: "fa-clipboard-check",
+                content: `
+                    <p class="mb-3"><strong class="text-white">Definition:</strong> Rigorous testing of the candidate model before promotion.</p>
+                    <ul class="list-disc list-outside ml-4 space-y-2">
+                        <li><strong>Offline Metrics:</strong> Accuracy, F1-score, AUC against a held-out test set.</li>
+                        <li><strong>Business Metrics:</strong> Impact on KPIs (e.g., revenue, click-through rate).</li>
+                        <li><strong>Comparison:</strong> Champion vs. Challenger comparison to ensure the new model is strictly better than the current one.</li>
+                    </ul>
+                `
+            },
+            {
+                title: "Continuous Versioning",
+                icon: "fa-history",
+                content: `
+                    <p class="mb-3"><strong class="text-white">Definition:</strong> Tracking every asset (Code, Data, Model) to ensure reproducibility.</p>
+                    <ul class="list-disc list-outside ml-4 space-y-2">
+                        <li><strong>Data Versioning:</strong> Tools like DVC or LakeFS to track datasets by commit hash.</li>
+                        <li><strong>Model Registry:</strong> Storing artifacts (ONNX, PKL) with metadata (MLflow, SageMaker).</li>
+                        <li><strong>Why?</strong> Allows you to "time travel" to any previous state of the system for debugging or auditing.</li>
+                    </ul>
+                `
+            },
+            {
+                title: "Continuous Monitoring",
+                icon: "fa-chart-line",
+                content: `
+                    <p class="mb-3"><strong class="text-white">Definition:</strong> Real-time tracking of model performance and data health in production.</p>
+                    <ul class="list-disc list-outside ml-4 space-y-2">
+                        <li><strong>Data Drift:</strong> Detecting changes in input distribution (P(X)).</li>
+                        <li><strong>Concept Drift:</strong> Detecting changes in the relationship between input and target (P(Y|X)).</li>
+                        <li><strong>System Health:</strong> Latency, throughput, and error rates.</li>
+                    </ul>
+                `
+            }
+        ];
+
+        let currentIndex = 0;
+        let isFlipped = false;
+
+        const cardInner = document.getElementById('cardInner');
+        const cardTitle = document.getElementById('cardTitle');
+        const cardBackTitle = document.getElementById('cardBackTitle');
+        const cardIcon = document.getElementById('cardIcon');
+        const cardContent = document.getElementById('cardContent');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const paginationDots = document.getElementById('paginationDots');
+
+        function init() {
+            renderPagination();
+            updateCard(false); // No animation on init
+        }
+
+        function renderPagination() {
+            paginationDots.innerHTML = '';
+            cards.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.className = `w-3 h-3 rounded-full transition-all duration-300 ${index === currentIndex ? 'bg-cyan-400 scale-125' : 'bg-slate-600'}`;
+                paginationDots.appendChild(dot);
+            });
+        }
+
+        function updateCard(animate = true) {
+            // If flipped, flip back first
+            if (isFlipped) {
+                flipCard();
+                setTimeout(() => loadCardData(animate), 300); // Wait for half flip
+            } else {
+                loadCardData(animate);
+            }
+        }
+
+        function loadCardData(animate) {
+            const data = cards[currentIndex];
+            
+            // Update Text
+            cardTitle.textContent = data.title;
+            cardBackTitle.textContent = data.title;
+            cardContent.innerHTML = data.content;
+            
+            // Update Icon
+            cardIcon.className = `fas ${data.icon} text-5xl text-cyan-600`;
+
+            // Update Buttons
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === cards.length - 1;
+
+            // Update Pagination
+            Array.from(paginationDots.children).forEach((dot, index) => {
+                dot.className = `w-3 h-3 rounded-full transition-all duration-300 ${index === currentIndex ? 'bg-cyan-400 scale-125' : 'bg-slate-600'}`;
+            });
+        }
+
+        function flipCard() {
+            isFlipped = !isFlipped;
+            if (isFlipped) {
+                cardInner.classList.add('flipped');
+            } else {
+                cardInner.classList.remove('flipped');
+            }
+        }
+
+        function nextCard() {
+            if (currentIndex < cards.length - 1) {
+                currentIndex++;
+                updateCard();
+            }
+        }
+
+        function prevCard() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCard();
+            }
+        }
+
+        // Event Listeners
+        nextBtn.addEventListener('click', nextCard);
+        prevBtn.addEventListener('click', prevCard);
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextCard();
+            if (e.key === 'ArrowLeft') prevCard();
+            if (e.key === ' ' || e.key === 'Enter') flipCard();
+        });
+
+        // Initialize
+        init();
+
+    </script>
+</body>
+</html>
