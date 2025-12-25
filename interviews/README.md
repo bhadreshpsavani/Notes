@@ -6,7 +6,7 @@ Each “flashcard” follows the format:
 **Q:** (Question)
 **A:** (Answer + concise insight 💡)
 
-<iframe src="interviews/mlops.html"  title="Description of animation"></iframe>
+<iframe src="mlops.html"  title="Description of animation"></iframe>
 
 ---
 
