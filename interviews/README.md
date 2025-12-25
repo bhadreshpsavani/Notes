@@ -6,7 +6,8 @@ Each “flashcard” follows the format:
 **Q:** (Question)
 **A:** (Answer + concise insight 💡)
 
-<iframe src="mlops.html" width="600" height="400" title="Description of animation"></iframe>
+<iframe src="interviews/mlops.html"  title="Description of animation"></iframe>
+
 ---
 
 # 🧠 AI Interview Flashcards
